@@ -77,10 +77,5 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://Gitcred@git.topsdemo.in/chetan/amazonspapi.git"
-        }
-    ]
+
 }
