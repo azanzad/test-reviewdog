@@ -1,0 +1,32 @@
+phpcs:
+  stage: test
+  image: php:8.1
+  script: 
+    - ls -la && pwd
+    - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+    - apt-get update -y
+    - apt-get install git -y 
+    - sh git-shell.sh 
+    - composer update 
+    - composer install 
+    - ./vendor/bin/phpcs --version
+    - ./vendor/bin/phpcs --ignore=vendor --standard=./phpcs.xml --extensions=php --report=checkstyle -q . | reviewdog -conf=.reviewdog.yml -name="PHP_CodeSniffer" -reporter=gitlab-mr-discussion -level=warning -fail-on-error
+  allow_failure: true
+
+phpmd:
+  stage: test
+  image: php:8.1
+  script:
+    - composer install --prefer-dist --no-progress --no-suggest
+    - ./vendor/bin/phpmd . text ./phpmd.xml --ignore-violations-on-exit --suffixes=php | sed -r "s/([0-9]+)\s+/\1:/gI" | reviewdog -conf=.reviewdog.yml -name="PHPMD" -reporter=gitlab-mr-discussion -level=warning -fail-on-error
+  allow_failure: true
+
+phpstan:
+  stage: test
+  image: php:8.1
+  script:
+    - composer install --prefer-dist --no-progress --no-suggest
+    - ./vendor/bin/phpstan --version
+    - ./vendor/bin/phpstan analyse --no-interaction --no-progress --level=max --memory-limit 1G --error-format=raw app bootstrap config database resources routes | reviewdog -conf=.reviewdog.yml -name="PHPStan" -reporter=gitlab-mr-discussion -level=warning -fail-on-error
+  allow_failure: true
+
