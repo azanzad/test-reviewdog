@@ -38,7 +38,7 @@ jobs:
           standard: 'phpmd.xml'
           target_directory: '.'
             
-   phpcs-linter:
+  phpcs-linter:
     name: PHPCS
     runs-on: ubuntu-latest-m
     steps:
