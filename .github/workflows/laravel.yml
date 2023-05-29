@@ -6,7 +6,6 @@ on:
       - develop
       
 jobs:
-
   phpunit:
     name: Unit and Feature Tests
     runs-on: ubuntu-latest-m
