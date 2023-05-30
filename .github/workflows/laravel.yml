@@ -1,12 +1,13 @@
-name: Develop
+name: Laravel
 
 on:
   push:
-    branches:
-      - develop
-      
-jobs:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
+
+jobs:
   phpunit:
     name: Unit and Feature Tests
     runs-on: ubuntu-latest-m
@@ -19,3 +20,6 @@ jobs:
           php-version: "8.2"
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_pgsql, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, calendar, pcov-1.0.10, sodium
           coverage: pcov 
+      # - name: Install Dependencies
+            # run: 
+              # composer install 
