@@ -18,7 +18,6 @@ jobs:
       - name: Run php check code with reviewdog
         uses: GeneaLabs/action-reviewdog-phpmd@1.0.4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
           level: 'warning'
           reporter: github-check
           standard: 'phpmd.xml'
