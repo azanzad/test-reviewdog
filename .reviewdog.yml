@@ -1,0 +1,16 @@
+runner:
+  phpcs:
+    cmd: ./vendor/bin/phpcs --ignore=vendor --standard=./phpcs.xml --extensions=php --report=checkstyle -q . || true
+    errorformat:
+      - checkstyle
+    level: warning
+  phpmd:
+    cmd: ./vendor/bin/phpmd . text ./phpmd.xml --ignore-violations-on-exit --suffixes=php | sed -r "s/([0-9]+)\s+/\1:/gI" || true
+    errorformat:
+      - phpstan
+    level: warning
+  phpstan:
+    cmd: ./vendor/bin/phpstan analyse --no-interaction --no-progress --level=max --memory-limit 1G --error-format=raw app bootstrap config database resources routes || true
+    errorformat:
+      - phpstan
+    level: warning
