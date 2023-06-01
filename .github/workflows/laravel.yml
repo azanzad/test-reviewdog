@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
      - name: Install dependencies
-       run: composer install --prefer-dist --no-progress --no-suggest
+       run: composer install --prefer-dist --no-progress
      - name: Check out code into the workspace
        uses: actions/checkout@v2
      - name: PHPStan
