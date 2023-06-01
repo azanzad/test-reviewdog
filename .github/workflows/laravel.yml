@@ -9,11 +9,13 @@ jobs:
   phpmd-linter:
     name: PHPstan
     runs-on: ubuntu-latest
-    steps:
-      - name: Check out code into the workspace
-        uses: actions/checkout@v2
-      - name: PHPStan
-        uses: chindit/actions-phpstan@master
+    steps: 
+     - name: Install dependencies
+       run: composer install --prefer-dist --no-progress --no-suggest
+     - name: Check out code into the workspace
+       uses: actions/checkout@v2
+     - name: PHPStan
+       uses: chindit/actions-phpstan@master
         
                   
           
