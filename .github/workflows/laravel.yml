@@ -10,15 +10,15 @@ on:
 jobs:
 
   phpmd-linter:
-    name: PHPMD
-    runs-on: ubuntu-latest-m
+    name: PHPstan
+    runs-on: ubuntu-latest
     steps:
       - name: Check out code into the workspace
-        uses: actions/checkout@v3
-      - name: Run php check code with reviewdog
-        uses: GeneaLabs/action-reviewdog-phpmd@1.0.4
+        uses: actions/checkout@v2
+      - name: PHPStan
+        uses: chindit/actions-phpstan@master
         with:
           level: 'warning'
           reporter: github-check
           standard: 'phpmd.xml'
-          target_directory: '.'
+          
